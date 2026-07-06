@@ -1,0 +1,40 @@
+# Example Apache virtual host for DocuSwift (PDF to Word Converter)
+# Copy to /etc/apache2/sites-available/pdf2word.conf, adjust paths/domain,
+# then: a2ensite pdf2word && a2enmod headers deflate expires && systemctl reload apache2
+
+<VirtualHost *:80>
+    ServerName pdf2word.example.com
+    DocumentRoot /var/www/pdf2word
+
+    <Directory /var/www/pdf2word>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Storage folders must never be served directly (also enforced by
+    # per-directory .htaccess files shipped in the project).
+    <Directory /var/www/pdf2word/uploads>
+        Require all denied
+    </Directory>
+    <Directory /var/www/pdf2word/converted>
+        Require all denied
+    </Directory>
+    <Directory /var/www/pdf2word/logs>
+        Require all denied
+    </Directory>
+    <Directory /var/www/pdf2word/includes>
+        Require all denied
+    </Directory>
+    <Directory /var/www/pdf2word/scripts>
+        Require all denied
+    </Directory>
+
+    # PHP upload limits must be >= Config::maxUploadBytes() (100MB by default).
+    php_admin_value upload_max_filesize 100M
+    php_admin_value post_max_size 105M
+    php_admin_value max_execution_time 60
+    php_admin_value memory_limit 256M
+
+    ErrorLog ${APACHE_LOG_DIR}/pdf2word-error.log
+    CustomLog ${APACHE_LOG_DIR}/pdf2word-access.log combined
+</VirtualHost>
