@@ -159,6 +159,24 @@ dropzone.addEventListener('drop', (e) => {
   if (file) handleFile(file);
 });
 
+Dropzone.options.dropzone = { // Make sure 'myDropzone' matches your HTML form ID
+    url: "upload.php", 
+    paramName: "file", 
+    maxFilesize: 10, // MB
+    acceptedFiles: ".pdf",
+    dictDefaultMessage: "Drop your PDF here to upload",
+    init: function() {
+        this.on("success", function(file, response) {
+            console.log("Server Response:", response);
+            alert("File uploaded successfully! (Conversion simulation)");
+            // If you have a download button, you can make it appear here using response.download_url
+        });
+        this.on("error", function(file, message) {
+            console.error("Upload Error:", message);
+            alert("Error: " + (message.error || "Unexpected server response"));
+        });
+    }
+};
 removeFileBtn.addEventListener('click', resetToIdle);
 convertAnotherBtn.addEventListener('click', resetToIdle);
 tryAgainBtn.addEventListener('click', resetToIdle);
