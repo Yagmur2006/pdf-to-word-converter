@@ -1,0 +1,4 @@
+flask>=3.0
+pdf2docx>=0.5
+werkzeug>=3.0
+docxcompose>=2.0

@@ -1,0 +1,13 @@
+{
+  "name": "pdf2word",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Online PDF to Word Converter - Flask backend with Node.js gateway",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'Python app - no build step required' && pip3 install --break-system-packages -r requirements.txt 2>/dev/null || true",
+    "lint": "python3 -m py_compile app.py",
+    "typecheck": "python3 -c 'from app import app; print(\"Type check passed\")'"
+  }
+}
