@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F8FAFC"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#g)" opacity="0.06"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(120,220)">
+    <rect width="90" height="90" rx="24" fill="#4F46E5"/>
+    <path d="M28 27C28 24.7909 29.7909 23 32 23H50.4c1.1 0 2.1.44 2.9 1.22l7.6 7.6c.78.78 1.22 1.83 1.22 2.93V63c0 2.2-1.8 4-4 4H32c-2.2 0-4-1.8-4-4V27z" fill="white"/>
+  </g>
+  <text x="240" y="270" font-family="Inter, sans-serif" font-size="56" font-weight="800" fill="#0F172A">DocuSwift</text>
+  <text x="120" y="360" font-family="Inter, sans-serif" font-size="44" font-weight="700" fill="#0F172A">Convert PDF to Word in Seconds</text>
+  <text x="120" y="415" font-family="Inter, sans-serif" font-size="24" fill="#64748B">Fast, accurate and free — built for students &amp; educators</text>
+</svg>

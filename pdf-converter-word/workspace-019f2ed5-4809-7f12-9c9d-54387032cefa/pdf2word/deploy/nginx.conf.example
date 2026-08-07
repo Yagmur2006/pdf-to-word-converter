@@ -1,0 +1,46 @@
+# Example Nginx server block for DocuSwift (PDF to Word Converter)
+# Adjust paths/domain and the PHP-FPM socket, then symlink into sites-enabled.
+
+server {
+    listen 80;
+    server_name pdf2word.example.com;
+    root /var/www/pdf2word;
+    index index.html;
+
+    client_max_body_size 100M;
+
+    # Never serve storage/internal folders directly.
+    location ~ ^/(uploads|converted|logs|includes|scripts)/ {
+        deny all;
+        return 404;
+    }
+
+    location ~ \.(json|log|py)$ {
+        deny all;
+        return 404;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api/ {
+        try_files $uri =404;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_read_timeout 60s;
+    }
+
+    location ~ \.php$ {
+        deny all; # only /api/*.php should be reachable, handled above
+    }
+
+    gzip on;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+}
